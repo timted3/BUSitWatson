@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Create an instance of Camera
-        mCamera = getCameraInstance();
+        //mCamera = getCameraInstance();
 
 //        // Create our Preview view and set it as the content of our activity.
 //        mPreview = new CameraPreview(this, mCamera);
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                getCameraInstance();
+
 
                 Intent intent = new Intent(getBaseContext(), CameraActivity.class);
                 startActivity(intent);
@@ -75,19 +75,23 @@ public class MainActivity extends AppCompatActivity {
         return(context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA));
     }
 
+
+
     /**
      * A safe way to get an instance of the Camera object.
      */
     public static Camera getCameraInstance() {
         Camera c = null;
         try {
-            //test
+
             c = Camera.open(); // attempt to get a Camera instance
 
-            String TAG = "Niks";
-            Log.d(TAG, "getCameraInstance: DOES THIS DO ANYTHING?  ");
+
+
         } catch (Exception e) {
             // Camera is not available (in use or does not exist)
+            String TAG = "Camera";
+            Log.d(TAG, e.getMessage());
         }
         return c; // returns null if camera is unavailable
     }
