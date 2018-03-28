@@ -1,10 +1,12 @@
 package com.example.issd.busit_watson;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         final ListView medList = findViewById(R.id.listMed);
 
 
+
         //testdata
 
         final String items[] = {"Paracetamol", "Morphine", "Inbrufen", "Avandary", "Kemstro", "Theophylline"};
@@ -55,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                getCameraInstance();
+
+                Intent intent = new Intent(getBaseContext(), CameraActivity.class);
+                startActivity(intent);
 
 
             }
@@ -75,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
         try {
             //test
             c = Camera.open(); // attempt to get a Camera instance
+
+            String TAG = "Niks";
+            Log.d(TAG, "getCameraInstance: DOES THIS DO ANYTHING?  ");
         } catch (Exception e) {
             // Camera is not available (in use or does not exist)
         }
