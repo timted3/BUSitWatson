@@ -1,7 +1,7 @@
 package com.example.issd.busit_watson;
 
 import android.content.Context;
-import android.graphics.Camera;
+import android.hardware.Camera;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;

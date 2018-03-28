@@ -2,7 +2,7 @@ package com.example.issd.busit_watson;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Camera;
+import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -64,13 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
-            // this device has a camera
-            return true;
-        } else {
-            // no camera on this device
-            return false;
-        }
+        return(context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA));
     }
 
     /**
