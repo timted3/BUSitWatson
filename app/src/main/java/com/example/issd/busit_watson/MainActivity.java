@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             mImageView.setImageBitmap(imageBitmap);
             VisualRecognition service =
-                    new VisualRecognition("{2016-05-20}", "{cec33a82f6f86557667f9c29f0ef6b80593f17ef}" );
+                    new VisualRecognition("{2016-05-20}", "{235580ef9fcb6ef3c756c9e0ff410d28b63407f25c22561f24821b959f3fb8df}" );
 
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             ClassifyOptions classifyOptions = new  ClassifyOptions.Builder()
                     .imagesFile(bs)
                         .threshold(0.6f)
+                    .url("https://service.eu.apiconnect.ibmcloud.com/gws/apigateway/api/235580ef9fcb6ef3c756c9e0ff410d28b63407f25c22561f24821b959f3fb8df/med")
                     .addClassifierId("DefaultCustomModel_1227141667")
                 .build();
 
@@ -154,9 +155,11 @@ public class MainActivity extends AppCompatActivity {
 
             service.classify(classifyOptions).enqueue(new ServiceCallback<ClassifiedImages>() {
                 @Override public void onResponse(ClassifiedImages response) {
+                    System.out.println("hallo");
                     System.out.println(response);
                 }
                 @Override public void onFailure(Exception e) {
+                    System.out.println(e.getMessage());
                 }
             });
 
