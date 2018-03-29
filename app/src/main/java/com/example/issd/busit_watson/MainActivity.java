@@ -59,14 +59,23 @@ public class MainActivity extends AppCompatActivity {
         final Button btnCamera = findViewById(R.id.btnCamera);
         final Button btnNext = findViewById(R.id.btnNext);
 
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
 
-        //testdata
 
-        final String items[] = {"Paracetamol", "Morphine", "Inbrufen", "Avandary", "Kemstro", "Theophylline"};
 
-        ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+                Intent intent = new Intent(getBaseContext(), MedListActivity.class);
+                startActivity(intent);
+
+
+
+            }
+
+        });
+
+        
+
 
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override public void onFailure(Exception e) {
                 }
             });
+
+
             //OkHttpClient from http://square.github.io/okhttp/
           /*  OkHttpClient client = new OkHttpClient();
             MediaType mediaType = MediaType.parse("application/json");
