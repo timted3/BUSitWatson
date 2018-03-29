@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.ibm.watson.developer_cloud.http.ServiceCallback;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.VisualRecognition;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.model.ClassifiedImages;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.model.ClassifyOptions;
@@ -23,7 +24,14 @@ import com.ibm.watson.developer_cloud.visual_recognition.v3.model.ClassifyOption
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -123,27 +131,40 @@ public class MainActivity extends AppCompatActivity {
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
             byte[] bitmapdata = bos.toByteArray();
             ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
+           // FileInputStream result  =
 
 
-            // InputStream imamgesStream = new FileInputStream(imageBitmap)
+//            InputStream imamgesStream = new FileInputStream(bs)
             ClassifyOptions classifyOptions = new  ClassifyOptions.Builder()
                     .imagesFile(bs)
-                    //    .threshold(0.6f)
+                        .threshold(0.6f)
+                    .addClassifierId("DefaultCustomModel_1227141667")
                 .build();
-           /* ClassifyOptions classifyOptions = new ClassifyOptions.Builder()
-                    .imagesFile(bs).parameters("{"classifier_ids": ["fruits_1462128776",
-                    + "SatelliteModel_6242312846"],"threshold": 0.6}")).build(); */
-           ClassifiedImages result = service.classify(classifyOptions).execute();
 
            //System.out.println(result);
-            
-          /*  VisualRecognition.method(parameters).enqueue(new ServiceCallback<ReturnType>() {
-                @Override public void onResponse(ReturnType response) {
-          
+
+            service.classify(classifyOptions).enqueue(new ServiceCallback<ClassifiedImages>() {
+                @Override public void onResponse(ClassifiedImages response) {
+                    System.out.println(response);
                 }
                 @Override public void onFailure(Exception e) {
                 }
-            });*/
+            });
+            //OkHttpClient from http://square.github.io/okhttp/
+          /*  OkHttpClient client = new OkHttpClient();
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\"id\":DefaultCustomModel_1227141667}");
+            Request request = new Request.Builder()
+                    .url("https://service.eu.apiconnect.ibmcloud.com/gws/apigateway/api/cec33a82f6f86557667f9c29f0ef6b80593f17ef/med")
+                    .post(body)
+                    .addHeader("content-type", "multipart/form-data")
+                    .addHeader("accept", "application/json")
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
 
         }
     }
