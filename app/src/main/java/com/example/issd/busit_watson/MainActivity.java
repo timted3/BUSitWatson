@@ -74,16 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        
-
-
-
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-
-            }
-        });
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
