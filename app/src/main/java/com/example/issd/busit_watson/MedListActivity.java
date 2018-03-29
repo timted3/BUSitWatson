@@ -24,6 +24,15 @@ public class MedListActivity extends AppCompatActivity {
 
         listMeds.setAdapter(medicineAdapter);
 
+        final String conflictmedicine[] = { "Morphine", "Inbrufen", "Xanax"};
+
+        ArrayAdapter<String> conflictmedicineAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, conflictmedicine);
+
+        final ListView listConflictMeds = findViewById(R.id.listConflictingMeds);
+
+        listConflictMeds.setAdapter(conflictmedicineAdapter);
+
 
 
 
