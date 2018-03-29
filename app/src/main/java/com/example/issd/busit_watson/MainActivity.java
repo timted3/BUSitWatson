@@ -17,7 +17,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.ibm.watson.developer_cloud.visual_recognition.v3.VisualRecognition;
+import com.ibm.watson.developer_cloud.visual_recognition.v3.model.ClassifiedImages;
+import com.ibm.watson.developer_cloud.visual_recognition.v3.model.ClassifyOptions;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -112,10 +116,35 @@ public class MainActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             mImageView.setImageBitmap(imageBitmap);
-            VisualRecognition service = new VisualRecognition(VisualRecognition.VERSION_DATE_2016_05_20);
-            service.setApiKey("{cec33a82f6f86557667f9c29f0ef6b80593f17ef}");
+            VisualRecognition service =
+                    new VisualRecognition("{2016-05-20}", "{cec33a82f6f86557667f9c29f0ef6b80593f17ef}" );
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+            ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
+
 
             // InputStream imamgesStream = new FileInputStream(imageBitmap)
+            ClassifyOptions classifyOptions = new  ClassifyOptions.Builder()
+                    .imagesFile(bs)
+                    //    .threshold(0.6f)
+                .build();
+           /* ClassifyOptions classifyOptions = new ClassifyOptions.Builder()
+                    .imagesFile(bs).parameters("{"classifier_ids": ["fruits_1462128776",
+                    + "SatelliteModel_6242312846"],"threshold": 0.6}")).build(); */
+           ClassifiedImages result = service.classify(classifyOptions).execute();
+
+           //System.out.println(result);
+            
+          /*  VisualRecognition.method(parameters).enqueue(new ServiceCallback<ReturnType>() {
+                @Override public void onResponse(ReturnType response) {
+          
+                }
+                @Override public void onFailure(Exception e) {
+                }
+            });*/
+
         }
     }
 }
