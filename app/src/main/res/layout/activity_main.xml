@@ -30,11 +30,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="146dp" />
+        android:layout_width="286dp"
+        android:layout_height="328dp"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="49dp" />
 
 
 </android.support.constraint.ConstraintLayout>

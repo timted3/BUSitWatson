@@ -16,6 +16,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.ibm.watson.developer_cloud.visual_recognition.v3.VisualRecognition;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     private Camera mCamera;
@@ -107,8 +112,10 @@ public class MainActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             mImageView.setImageBitmap(imageBitmap);
-            
+            VisualRecognition service = new VisualRecognition(VisualRecognition.VERSION_DATE_2016_05_20);
+            service.setApiKey("{cec33a82f6f86557667f9c29f0ef6b80593f17ef}");
 
+            // InputStream imamgesStream = new FileInputStream(imageBitmap)
         }
     }
 }
